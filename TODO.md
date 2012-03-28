@@ -1,0 +1,11 @@
+- protype: add db to app - store something simple
+- start the test driving process
+- get version number of app to show on screen
+- get this todo list into the app so everyone can know the plan
+- MMF: list of drinks w/ ingredients
+- MMF: adding new drinks
+- MMF: list of ingredients on hand
+- MMF: pick drinks based upon ingredients on hand
+- MMF: list of ingredients per user
+- MMF: users can rate drinks up/down
+- MMF: sort drinks returned by rating
