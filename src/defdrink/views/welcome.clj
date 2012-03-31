@@ -20,11 +20,11 @@
 
 
 (noir/defpage "/welcome" []
-         (common/layout
-            (welcome-text) 
-            (form/form-to [:post "/welcome"]
-                          (new-drink-form))
-            ))
+              (common/layout
+                (welcome-text) 
+                (form/form-to [:post "/welcome"]
+                              (new-drink-form))
+                ))
 
 (noir/defpage [:post "/welcome"] []
               (render "/welcome"))
