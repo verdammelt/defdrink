@@ -1,13 +1,11 @@
 (ns defdrink.models.drinks
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.java.jdbc :as sql2])
+  (:require [defdrink.utils.sql :as sql]))
 
 (defn all []
-  (sql/with-connection (System/getenv "DATABASE_URL")
-                       (sql/with-query-results results
-                                               ["select * from drinks order by name asc"]
-                                               (into [] results))))
+  (sql/select :drinks))
 
 (defn insert [name]
-  (sql/with-connection (System/getenv "DATABASE_URL")
-                       (sql/insert-record :drinks {:name name})))
+  (sql2/with-connection (System/getenv "DATABASE_URL")
+                       (sql2/insert-record :drinks {:name name})))
 
