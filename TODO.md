@@ -1,5 +1,3 @@
-- start the test driving process
-
 - get version number of app to show on screen
 - get this todo list into the app so everyone can know the plan
 - MMF: list of drinks w/ ingredients
