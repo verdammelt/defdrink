@@ -4,16 +4,18 @@
         noir.util.test
         midje-html-checkers.core))
 
+(defchecker has-link-with-text [regexp]
+  (checker [actual]
+    ((at-any [:a] (has-text regexp)) (:body actual))))
+
 (defchecker has-link-with-href [href]
-  (at-any [:a] (has-attr :href href)))
+  (checker [actual]
+    ((at-any [:a] (has-attr :href href)) (:body actual))))
 
-(defchecker has-link-with-text-matching [regexp]
-  (at-any [:a] (has-text regexp)))
-
-(fact
-  ;(:body (send-request "/welcome")) => (has-link-with-href "foo")
-  (:body (send-request "/welcome")) => (has-link-with-href "/drinks")
-
-  (:body (send-request "/welcome")) => (has-link-with-text-matching #"\ABartender.*")
+(fact "about the welcome page"
+  (let [response (send-request "/welcome")]
+    response => (has-link-with-href "/drinks")
+    response => (has-link-with-text #"\ABartender.*")
+    )
   )
 
