@@ -9,6 +9,7 @@
                  ]
   :dev-dependencies [
                      [midje "1.4.0"]
+                     [midje-html-checkers "1.0.1"]
                      [com.stuartsierra/lazytest "1.2.3"]
                      ]
   :repositories {"stuart" "http://stuartsierra.com/maven2"}
