@@ -1,5 +1,4 @@
 - Walking Skeleton: 
-    - testing noir display
     - acceptance test skeleton?
 - get version number of app to show on screen
 - get this todo list into the app so everyone can know the plan
