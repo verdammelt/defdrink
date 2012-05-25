@@ -6,6 +6,7 @@
                  [postgresql/postgresql "9.1-901.jdbc4"]
                  [org.clojure/java.jdbc "0.2.1"]
                  [noir "1.2.2"]
+                 [clj-stacktrace "0.2.4"] ;; needed for clojure-swank
                  ]
   :dev-dependencies [
                      [midje "1.4.0"]
