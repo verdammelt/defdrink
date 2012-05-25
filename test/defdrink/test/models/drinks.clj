@@ -1,5 +1,4 @@
 (ns defdrink.test.models.drinks
-  (:use clojure.test)
   (:use midje.sweet)
   (:use defdrink.models.drinks)
   (:require [defdrink.utils.sql :as sql]))

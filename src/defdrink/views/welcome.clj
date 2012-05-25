@@ -1,8 +1,7 @@
 (ns defdrink.views.welcome
-  (:require [defdrink.views.common :as common])
-  (:use 
-        [hiccup.page-helpers :as html]
-    [noir.core :as noir]))
+  (:require [defdrink.views.common :as common]
+            [hiccup.page-helpers :as html]
+            [noir.core :as noir]))
 
 (noir/defpartial welcome-text []
   [:div

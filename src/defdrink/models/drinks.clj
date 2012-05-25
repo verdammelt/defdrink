@@ -1,5 +1,4 @@
 (ns defdrink.models.drinks
-  (:require [clojure.java.jdbc :as sql2])
   (:require [defdrink.utils.sql :as sql]))
 
 (defn all []

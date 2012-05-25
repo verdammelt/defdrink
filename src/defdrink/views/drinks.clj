@@ -1,14 +1,13 @@
 (ns defdrink.views.drinks
   (:require 
     [defdrink.models.drinks :as drinks]
-    [defdrink.views.common :as common])
-  (:use [noir.core :as noir]
-        [hiccup.core :as html]
-        [hiccup.form-helpers :as form]))
+    [defdrink.views.common :as common]
+    [noir.core :as noir]
+    [hiccup.form-helpers :as form]))
 
 (noir/defpartial new-drink-form []
-  (label "name" "Drink Name:")
-  (text-field "name" "")
+  (form/label "name" "Drink Name:")
+  (form/text-field "name" "")
   (form/submit-button "(defdrink)"))
 
 (noir/defpartial display-drink [{:keys [id name]}]
@@ -21,13 +20,13 @@
       [:ul#drinks
        (map display-drink drinks)])))
 
-(defpage "/drinks" {}
+(noir/defpage "/drinks" {}
   (common/layout
     (form/form-to [:post "/drinks" ]
                   (new-drink-form))
     (list-of-drinks)))
 
-(defpage [:post "/drinks"] {:keys [name]}
+(noir/defpage [:post "/drinks"] {:keys [name]}
   (drinks/insert name)
-  (render "/drinks"))
+  (noir/render "/drinks"))
 

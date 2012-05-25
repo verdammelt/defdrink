@@ -1,12 +1,12 @@
 (ns defdrink.views.common
-  (:use [noir.core :only [defpartial]]
-        [hiccup.page-helpers :only [include-css html5]]))
+  (:use [noir.core :as noir] 
+        [hiccup.page-helpers :only [include-css html5] :as hiccup]))
 
-(defpartial layout [& content]
-  (html5
+(noir/defpartial layout [& content]
+  (hiccup/html5
     [:head
      [:title "(defdrink)"]
-     (include-css "/css/reset.css")]
+     (hiccup/include-css "/css/reset.css")]
     [:body
      [:div#wrapper
       content]]))
