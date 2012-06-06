@@ -1,9 +1,19 @@
-- get version number of app to show on screen
-- get this todo list into the app so everyone can know the plan
 - MMF: list of drinks w/ ingredients
+  - import drink list to start (maybe just the names?)
+  - show list of drinks 
+  - click on drink to see ingredients
+    - ingredients
+    - measures
+    - instructions
+    - tools needed
 - MMF: adding new drinks
 - MMF: list of ingredients on hand
 - MMF: pick drinks based upon ingredients on hand
 - MMF: list of ingredients per user
 - MMF: users can rate drinks up/down
 - MMF: sort drinks returned by rating
+
+- Misc:
+  - get version number of app to show on screen
+  - get this todo list into the app so everyone can know the plan
+  - use something like drift for db migrations
