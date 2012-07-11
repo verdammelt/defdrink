@@ -1,3 +1,8 @@
+#!/bin/bash
+
 postgres -D pg > /dev/null 2>&1 &
 
 export DATABASE_URL=postgresql://localhost/defdrink
+
+lein run
+
