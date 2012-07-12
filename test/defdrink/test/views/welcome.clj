@@ -15,8 +15,6 @@
 (fact "about the welcome page"
   (let [response (send-request "/welcome")]
     response => (has-link-with-href "/drinks")
-    response => (has-link-with-text #"\ABartender.*")
-    )
-  )
+    response => (has-link-with-text #"\ABartender.*")))
 
 
