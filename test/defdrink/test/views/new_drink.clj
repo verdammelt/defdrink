@@ -6,37 +6,43 @@
   (:use midje-html-checkers.core)
   )
 
+(defn make-html [string] (html-resource-from-string string))
+
+(defn find-elements [predicate html selector]
+  (filter predicate (select html selector)))
+
+(defn find-element [predicate html selector]
+  (first (find-elements predicate html selector)))
+
+(defn attr [attr html]
+  (attr (:attrs html)))
+
 (defchecker has-input-with-label [text]
   (checker [actual]
-    (let [html (html-resource-from-string actual)
-          the-label (first (filter (has-text text) 
-                                   (select html [:label])))]
+    (let [html (make-html actual)
+          the-label (find-element (has-text text) html [:label])]
       (and the-label
-           (let [for-attr (:for (:attrs the-label))]
-             (select html [(keyword (str "input#" for-attr))]))))))
+           (let [for-attr (attr :for the-label)]
+             (find-element identity html 
+                           [(keyword (str "input#" for-attr))]))))))
       
 
 (defchecker has-form-posting-to [url]
   (checker [actual]
-    (let [form (first (select (html-resource-from-string actual) [:form]))]
-      (and ((has-attr :method "POST") form)
-           ((has-attr :action "/new-drink") form)
-           ))))
+    (find-element (and (has-attr :method "POST") 
+                       (has-attr :action "/new-drink"))
+                  (make-html actual) [:form])))
 
 (defchecker has-submit-button-with-label [label]
   (checker [actual]
-    (let [html (html-resource-from-string actual)
-          all-inputs (select html [:input])
-          submit-button (first (filter (and (has-attr :type "submit")
-                                           (has-attr :value label)) all-inputs) ) ]
-      submit-button
-      )))
+    (find-element (and (has-attr :type "foo")
+                       (has-attr :value label)) 
+      (make-html actual) [:input])))
 
-
-(fact "about the new drink page"
-  (let [body (:body (send-request "/new-drink"))]
-    body => (has-form-posting-to "/new-drink")
-    body => (has-input-with-label "Name: ")
-    body => (has-submit-button-with-label "(defdrink)")
-    ))
+(fact "about the new drink form"
+  (fact "how it looks"
+    (let [body (:body (send-request "/new-drink"))]
+      body => (has-form-posting-to "/new-drink")
+      body => (has-input-with-label "Name: ")
+      body => (has-submit-button-with-label "(defdrink)"))))
 
