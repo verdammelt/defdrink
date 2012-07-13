@@ -17,27 +17,30 @@
 (defn attr [attr html]
   (attr (:attrs html)))
 
+(defn both [fn1 fn2]
+  (fn [e] (and (fn1 e) (fn2 e))))
+
 (defchecker has-input-with-label [text]
   (checker [actual]
     (let [html (make-html actual)
-          the-label (find-element (has-text text) html [:label])]
+          the-label (find-element (has-text text) html [:label]) ]
       (and the-label
            (let [for-attr (attr :for the-label)]
              (find-element identity html 
                            [(keyword (str "input#" for-attr))]))))))
-      
 
 (defchecker has-form-posting-to [url]
   (checker [actual]
-    (find-element (and (has-attr :method "POST") 
-                       (has-attr :action "/new-drink"))
-                  (make-html actual) [:form])))
+    (find-element 
+      (both (has-attr :method "POST") (has-attr :action "/new-drink"))
+      (make-html actual) [:form])))
 
 (defchecker has-submit-button-with-label [label]
   (checker [actual]
-    (find-element (and (has-attr :type "foo")
-                       (has-attr :value label)) 
+    (find-element 
+      (both (has-attr :type "submit") (has-attr :value label))
       (make-html actual) [:input])))
+
 
 (fact "about the new drink form"
   (fact "how it looks"
